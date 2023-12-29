@@ -1,0 +1,37 @@
+const mongoose = require('mongoose');
+
+const messageSchema = new mongoose.Schema({
+  sender: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Assuming you have a User model
+    required: true,
+  },
+  content: {
+    text: {
+      type: String,
+    },
+    images: [{
+      type: String, // URL or path to the image file
+    }],
+    videos: [{
+      type: String, // URL or path to the video file
+    }],
+    emojis: [{
+      type: String,
+    }],
+    stickers: [{
+      type: String,
+    }],
+    gifs: [{
+      type: String, // URL or path to the GIF file
+    }],
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Message = mongoose.model('Message', messageSchema);
+
+module.exports = Message;
